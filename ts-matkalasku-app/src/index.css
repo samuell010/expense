@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import "keen-slider/keen-slider.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+@layer components {
+  .button-neutral {
+    @apply cursor-pointer rounded-lg border border-none bg-cyan-light-600 p-2 font-medium text-gray-200 hover:bg-opacity-75 hover:text-gray-800 dark:bg-blue-dark-300 dark:text-gray-800 dark:hover:bg-blue-dark-800 dark:hover:text-gray-200;
+  }
+  .button-add {
+    @apply cursor-pointer rounded-lg border border-none bg-emerald-600 p-2 font-medium text-gray-200 hover:bg-emerald-800;
+  }
+  .button-delete {
+    @apply cursor-pointer rounded-lg border border-none bg-gray-200 p-2 font-medium text-red-700 outline outline-red-800 hover:bg-red-800 hover:text-gray-200 dark:bg-red-800 dark:text-gray-200 dark:outline-none dark:hover:bg-gray-200 dark:hover:text-red-800;
+  }
+  .colored-window {
+    @apply bg-gray-light-100 text-gray-800 dark:bg-blue-dark-900 dark:text-gray-200;
+  }
+}

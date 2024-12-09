@@ -1,0 +1,22 @@
+{
+  "Setting": "Asetus",
+  "Language": "Kieli",
+  "Currency": "Valuutta",
+  "Locations": "Oletuspaikat",
+  "Select Country": "Valitse maa",
+  "Country": "Maa",
+  "Canada": "Kanada",
+  "Spain": "Espanja",
+  "United States": "Yhdysvallat",
+  "Finland": "Suomi",
+  "City": "Kaupunki",
+  "Latitude": "Leveysaste",
+  "Longitude": "Pituusaste",
+  "Address": "Osoite",
+  "Remove": "Poista",
+  "Add Location": "Lisää sijainti",
+  "Save Settings": "Tallenna asetukset",
+  "Saving...": "Tallennetaan...",
+  "Add": "Lisää",
+  "Update": "Päivitä"
+}

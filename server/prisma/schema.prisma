@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Report {
+  id                    Int     @id @default(autoincrement())
+  title               String              @db.VarChar(150)
+  description         String              @db.VarChar(150)
+  startDate           DateTime           
+  endDate             DateTime            
+  kilometerAllowances KilometerAllowance[]
+  dailyAllowances     DailyAllowance[]
+  otherExpenses       OtherExpense[]
+  createdAt             DateTime            @default(now())     // Automatically set when created
+  updatedAt             DateTime            @updatedAt          // Automatically updated when the record changes
+  status                ReportStatus    @default(DRAFT)
+}
+
+enum ReportStatus {      
+  DRAFT
+  COMPLETED
+  DELETED
+}
+
+
+model KilometerAllowance {
+  id             Int     @id @default(autoincrement())
+  description    String  @db.VarChar(150)
+  vehicleInfo    String  @db.VarChar(50)
+  distance       Float
+  totalCost      Float
+  startPoint     String
+  endPoint       String
+  startLat       Float
+  startLng       Float
+  endLat         Float
+  endLng         Float
+  startDate      DateTime 
+  endDate        DateTime 
+  passengers     Int
+  passengerNames String[]
+  reportId         Int
+  report           Report    @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+}
+// change name to DailyAllowance
+// add off-days field
+model DailyAllowance {
+  id              Int     @id @default(autoincrement())
+  description     String  @db.VarChar(150)
+  totalAllowances Int
+  freeMeals       Int
+  country         String  @db.VarChar(30)
+  over_5_km       Boolean @default(false)
+  over_15_km      Boolean @default(false)
+  travelingByShipOrPlane  Boolean @default(false)
+  startDate       DateTime 
+  endDate         DateTime 
+  reportId         Int
+  report           Report    @relation(fields: [reportId], references: [id], onDelete: Cascade)
+}
+
+model OtherExpense {
+  id                    Int     @id @default(autoincrement())
+  type                  String  @db.VarChar(30)
+  date                  DateTime 
+  amount                Float   
+  country               String  @db.VarChar(30)
+  vat                   Float
+  sum                   Float
+  description           String  @db.VarChar(150)
+  comment               String  @db.VarChar(300)
+  reportId              Int
+  attachments           Attachment[]
+  report           Report    @relation(fields: [reportId], references: [id], onDelete: Cascade)
+}
+
+model Attachment {
+  id                    Int     @id @default(autoincrement())
+  fileName              String  @db.VarChar(300)
+  url                   String  @db.VarChar(2000) @unique 
+  urlExpiration         DateTime?
+  otherExpense          OtherExpense    @relation(fields: [otherExpenseId], references: [id], onDelete: Cascade)
+  otherExpenseId        Int     
+}
+model Location {
+  id        Int      @id @default(autoincrement())
+  country   String
+
+  city      String
+  //latitude  Float    
+  //longitude Float    
+  address   String
+  settingId Int 
+  setting   Setting  @relation(fields: [settingId],references: [id],onDelete: Cascade)
+}
+
+model Setting {
+ id        Int      @id @default(autoincrement())
+ currency  String
+ language  String
+ locations Location[]
+ userId    String   @unique
+}

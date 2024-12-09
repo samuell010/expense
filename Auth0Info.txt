@@ -1,0 +1,23 @@
+
+Auth0 settings
+
+Travel account application settings:
+On basic information you have Domain and Client. These two define a specific application to which the code can connect to. These are propably good to be stored in an env file later on.
+The application type is set to Regular Web Application since this is a web application.
+On application URls Allowed callback URls has http://localhost:5173/home since that is the page you would usually like to be redirected after logging in. Allowed logout URls has http://localhost:5173/ since that is the welcome page and it just makes sense to be redirected there. Allowed web origins also has http://localhost:5173/ because it's the page from where you would go to the login.
+Cross origin authentication is turned on. And it is turned on for http://localhost:5173/
+Everything else in the basic application settings should be as they are by default.
+In advanced setting grant types include: implicit, Authorization code and Refresh token.
+In the Credential tab of the travel account application the authentication method is set to none. This means that Auth0 handles all of the needed server side stuff.
+In the connections tab username-password-authentication and google-oauth2 are turned on.
+The application also uses developement mode currently. This might need to be set to production mode later on but I'm not completely sure.
+
+Authentication settings:
+In the database settings requires username is turned on, so that the user can add a username during the registration. Usernames min and max character lenght is set to the default which is from 1 to 15.
+In the applications tab default app and travel account app are turned on. This just mean that these apps are using the Auth0 database connection.
+
+User management:
+From the users tab you can manage all users. You can change their information and delete users for example. You can also create and add roles to different users if needed.
+
+Auth0 teams page:
+From Auth0 teams page you can manage the tenant and the team members. You can assign roles for these members. You can only have 2 more people with you on the team with the free version of Auth0.
